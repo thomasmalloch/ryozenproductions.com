@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # installed apps
     'crispy_forms',
@@ -136,7 +137,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, '../common/static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # Session
 SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
