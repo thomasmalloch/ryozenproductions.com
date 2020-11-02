@@ -1,0 +1,39 @@
+{% extends "account/accountbase.html" %}
+
+{% block info %}
+
+<div class="text-center justify-content-md-center" style="max-width:800px;">
+    <div class="card align-self-center">
+        <h5 class="card-header">Account</h5>
+        <div class="card-body text-left">
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <th scope="row">Name:</th>
+                        <td>{{ user.first_name }} {{ user.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Username:</th>
+                        <td>{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Email:</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">User Level:</th>
+                        <td>{% if user.is_superuser %}Admin{% else %}User{% endif %}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card mt-3 align-self-center">
+        <h5 class="card-header">Comments</h5>
+        <div class="card-body text-left">Not implemented yet :(</div>
+    </div>
+
+</div>
+
+{% endblock %}

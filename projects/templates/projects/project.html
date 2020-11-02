@@ -1,0 +1,53 @@
+{% extends "projects/projectsbase.html" %}
+
+{% block projects %}
+{% load static %}
+{% for post in posts %}
+        {% if post.is_public or user.is_superuser %}
+
+        <article class="mb-3 pb-3 border-bottom">
+                <header class="mb-3" >
+                    <a class="" href="{% url 'post' pk=post.pk %}">
+                        <h3 class="py-0 my-0">{{post.title}}</h3>
+                    </a>
+                    <small class="text-muted">{{ post.summary }}</small>
+                    <div>
+                        <span class="mr-1">
+                            <a href="{% url 'author' author_pk=post.author.pk %}">
+                                <img class="img" height="12em" src="{% static 'news/icons/glyphicons-4-user.png' %}"/>
+                                {{ post.author.first_name }} {{ post.author.last_name }}
+                            </a>
+                        </span>
+                        <span class="mr-1">
+                            <a href="{% url 'date' year=post.created.year month=post.created.month %}">
+                                <img class="img" height="12em" src="{% static 'news/icons/glyphicons-46-calendar.png' %}"/>
+                                {{ post.created|date:"M j, Y" }}
+                            </a>
+                        </span>
+                    </div>
+                </header>
+                <div>
+                    <p> {{ post.body|striptags|default:"empty"|truncatewords:25 }} <a href="{% url 'post' pk=post.pk %}">Read more [...]</a> </p>
+                </div>
+                <footer class="mt-2">
+                    <span class="text-muted">
+                        <a href="{% url 'category' category_pk=post.category.pk %}">
+                            <img class="img" height="12em" src="{% static 'news/icons/glyphicons-145-folder-open.png' %}"/>
+                            {{ post.category }}
+                        </a>
+                    </span>
+                    {% if user.is_superuser %}
+                        <span class="text-muted mx-1">Admin:</span>
+                        <a href="{% url 'edit' pk=post.pk%}">Edit</a>
+                        |
+                        <a href="{% url 'action' pk=post.pk action='delete' %}">Delete</a>
+                        |
+                        <a href="{% url 'action' pk=post.pk action='toggle-public' %}">{% if post.is_public %}Make Private{% else %}Make Public{% endif %}</a>
+                    {% endif %}
+                </footer>
+        </article>
+
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}
