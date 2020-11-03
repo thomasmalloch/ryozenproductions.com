@@ -1,0 +1,30 @@
+{% extends "common/base.html" %}
+
+{% block content %}
+
+<nav>
+
+</nav>
+<div class="container mt-3">
+
+    <div class="row">
+        <div class="col-md-8 col-lg-9">
+
+            {{ selected.body|safe }}
+
+        </div>
+        <div class="col-md-4 col-lg-3 bg-light">
+
+            {% for chapter in chapters %}
+
+                {% if chapter.is_public or user.is_superuser %}
+                    <a href="{% url 'chapter' project_pk=project.pk chapter_sort=chapter.sort %}">{{ chapter.title }}</a>
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

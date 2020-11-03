@@ -2,47 +2,47 @@
 
 {% block projects %}
 {% load static %}
-{% for post in posts %}
-        {% if post.is_public or user.is_superuser %}
+{% for project in projects %}
+        {% if project.is_public or user.is_superuser %}
 
         <article class="mb-3 pb-3 border-bottom">
                 <header class="mb-3" >
-                    <a class="" href="{% url 'post' pk=post.pk %}">
-                        <h3 class="py-0 my-0">{{post.title}}</h3>
+                    <a class="" href="{% url 'project' pk=project.pk %}">
+                        <h3 class="py-0 my-0">{{ project.title }}</h3>
                     </a>
-                    <small class="text-muted">{{ post.summary }}</small>
+                    <small class="text-muted">{{ project.description }}</small>
                     <div>
                         <span class="mr-1">
-                            <a href="{% url 'author' author_pk=post.author.pk %}">
+                            <a href="#">
                                 <img class="img" height="12em" src="{% static 'news/icons/glyphicons-4-user.png' %}"/>
-                                {{ post.author.first_name }} {{ post.author.last_name }}
+                                {{ project.author.first_name }} {{ project.author.last_name }}
                             </a>
                         </span>
                         <span class="mr-1">
-                            <a href="{% url 'date' year=post.created.year month=post.created.month %}">
+                            <a href="#">
                                 <img class="img" height="12em" src="{% static 'news/icons/glyphicons-46-calendar.png' %}"/>
-                                {{ post.created|date:"M j, Y" }}
+                                {{ project.created|date:"M j, Y" }}
                             </a>
                         </span>
                     </div>
                 </header>
                 <div>
-                    <p> {{ post.body|striptags|default:"empty"|truncatewords:25 }} <a href="{% url 'post' pk=post.pk %}">Read more [...]</a> </p>
+                    <p> {{ project.description|striptags|default:"empty"|truncatewords:25 }} <a href="#">Read more [...]</a> </p>
                 </div>
                 <footer class="mt-2">
                     <span class="text-muted">
-                        <a href="{% url 'category' category_pk=post.category.pk %}">
+                        <a href="#">
                             <img class="img" height="12em" src="{% static 'news/icons/glyphicons-145-folder-open.png' %}"/>
-                            {{ post.category }}
+                            {{ project.category }}
                         </a>
                     </span>
                     {% if user.is_superuser %}
                         <span class="text-muted mx-1">Admin:</span>
-                        <a href="{% url 'edit' pk=post.pk%}">Edit</a>
+                        <a href="#">Edit</a>
                         |
-                        <a href="{% url 'action' pk=post.pk action='delete' %}">Delete</a>
+                        <a href="#">Delete</a>
                         |
-                        <a href="{% url 'action' pk=post.pk action='toggle-public' %}">{% if post.is_public %}Make Private{% else %}Make Public{% endif %}</a>
+                        <a href="#">{% if post.is_public %}Make Private{% else %}Make Public{% endif %}</a>
                     {% endif %}
                 </footer>
         </article>
