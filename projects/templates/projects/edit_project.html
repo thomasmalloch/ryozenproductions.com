@@ -24,6 +24,8 @@
                 height: 200
               });
             </script>
+            <div class="dropdown-divider"></div>
+            <a href="{% url 'project_action' project_slug=project.slug action='delete' %}">Delete Project</a>
         </div>
     </div>
 </div>

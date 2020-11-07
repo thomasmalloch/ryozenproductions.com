@@ -27,10 +27,7 @@
                     <footer class="mt-2">
                         <span class="text-muted">Admin:</span>
                         <a href="{% url 'edit_project' project_slug=project.slug %}">Edit</a>
-                        |
-                        <a href="{% url 'project_action' project_slug=project.slug action='delete' %}">Delete</a>
-                        |
-                        <a href="{% url 'project_action' project_slug=project.slug action='toggle-public' %}">{% if project.is_public %}Make Private{% else %}Make Public{% endif %}</a>
+                        | <a href="{% url 'project_action' project_slug=project.slug action='toggle-public' %}">{% if project.is_public %}Make Private{% else %}Make Public{% endif %}</a>
                     </footer>
                 {% endif %}
         </article>

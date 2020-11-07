@@ -36,7 +36,7 @@ def chapter_view(request, project_slug, chapter_sort):
     # get objects from database
     project = Project.objects.get(slug=project_slug)
     chapters = Chapter.objects.filter(project__pk=project.pk).order_by("sort")
-    selected = filter(lambda c: c.sort == chapter_sort, chapters)
+    selected = list(filter(lambda c: c.sort == chapter_sort, chapters))[-1]
 
     # build page context
     context = Functions.build_page_context("projects", request)
@@ -82,15 +82,16 @@ def edit_chapter(request, project_slug, chapter_sort=None):
     project = Project.objects.get(slug=project_slug)
     chapters = Chapter.objects.filter(project__pk=project.pk).order_by("sort")
     if chapter_sort is None:
+        print("no chapter")
         chapter = Chapter()
         chapter.user = request.user
         chapter.project = project
         if len(chapters) == 0:
             chapter.sort = 0
         else:
-            chapter.sort = int(chapters[-1].sort) + 1
+            chapter.sort = int(list(chapters)[-1].sort) + 1
     else:
-        chapter = filter(lambda c: c.sort == chapter_sort, chapters)
+        chapter = list(filter(lambda c: c.sort == chapter_sort, chapters))[-1]
 
     if request.method == 'POST':
         form = ChapterForm(request.POST)

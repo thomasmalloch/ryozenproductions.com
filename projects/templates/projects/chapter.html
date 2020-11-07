@@ -16,15 +16,22 @@
         <div class="col-md-4 col-lg-3 bg-light">
 
             {% for chapter in chapters %}
-
                 {% if chapter.is_public or user.is_superuser %}
-                    <a href="{% url 'chapter' project_slug=project.slug chapter_sort=chapter.sort %}">{{ chapter.title }}</a>
-                {% endif %}
-                {% if project.user == user %}
+                    <div>
+                        <a href="{% url 'chapter' project_slug=project.slug chapter_sort=chapter.sort %}">{{ chapter.title }}</a>
+                        {% if user.is_superuser %}
+                        |<a href="{% url 'edit_chapter' project_slug=project.slug chapter_sort=chapter.sort %}">Edit</a>
+                        <!--|<a href="{% url 'chapter_action' project_slug=project.slug chapter_sort=chapter.sort action='delete' %}">Delete</a>-->
+                        |<a href="{% url 'chapter_action' project_slug=project.slug chapter_sort=chapter.sort action='toggle_public' %}">{% if project.is_public %}Make Private{% else %}Make Public{% endif %}</a>
+                        {% endif %}
+                    </div>
                 {% endif %}
 
             {% endfor %}
-
+            {% if user.is_superuser %}
+                <div class="dropdown-divider"></div>
+                <a href="{% url 'make_chapter' project_slug=project.slug %}">Add New Chapter</a>
+            {% endif %}
         </div>
     </div>
 </div>
