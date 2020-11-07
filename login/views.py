@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .forms import LoginForm, UserForm
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
@@ -18,15 +19,8 @@ def login_page(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            try:
-                user = User.objects.get(email__iexact=form.cleaned_data["email"])
-            except:
-                user = None
-
-            user = authenticate(request, username=user.username, password=form.cleaned_data["password"])
-            if user is not None:
-                login(request, user)
-                return redirect('index')
+            login(request, form.cleaned_data["user"])
+            return redirect('index')
     else:
         form = LoginForm()
 

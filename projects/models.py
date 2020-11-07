@@ -1,5 +1,11 @@
+import uuid
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.text import slugify
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=100, verbose_name="Name")
 
 
 class Project(models.Model):
@@ -7,9 +13,11 @@ class Project(models.Model):
     description = models.CharField(max_length=100, default="Project Description", verbose_name="Description:")
     is_public = models.BooleanField(default=False, verbose_name="Is Public:")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=100, default=slugify(uuid.uuid4()))
+    tags = models.ManyToManyField(Tag)
 
     def __str__(self):
-        return self.title
+        return str(self.title) + " • " + str(self.description)
 
 
 class Chapter(models.Model):
@@ -22,7 +30,7 @@ class Chapter(models.Model):
     sort = models.IntegerField()
 
     def __str__(self):
-        return self.title
+        return str(self.sort) + " • " + str(self.title) + " Project: " + str(self.project.title)
 
 
 class Comment(models.Model):
@@ -36,9 +44,6 @@ class Comment(models.Model):
 
     class Meta:
         permissions = [
-            ("can_comment", "User can comment on a chapter"),
-            ("can_edit_self", "User can edit their own comments"),
-            ("can_edit_other", "User can edit other another user's comment"),
-            ("can_delete_self", "User can delete their comment"),
-            ("can_delete_other", "User can delete another user's comment"),
+            ("change_other", "User can edit other another user's comment"),
+            ("delete_other", "User can delete another user's comment"),
         ]

@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
 UserForm_NAME_MAPPING = {
@@ -46,4 +47,21 @@ class LoginForm(forms.Form):
     email = forms.EmailField(widget=forms.EmailInput)
     password = forms.CharField(widget=forms.PasswordInput())
 
+    def clean(self):
+        cleaned_data = super(LoginForm, self).clean()
+        try:
+            user = User.objects.get(email=cleaned_data["email"])
+        except:
+            raise forms.ValidationError("Email or password are incorrect")
 
+        user = authenticate(username=user.username, password=cleaned_data["password"])
+        if user is None:
+            raise forms.ValidationError("Email or password are incorrect")
+
+        cleaned_data["user"] = user
+        return cleaned_data
+
+    def add_prefix(self, field_name):
+        # look up field name; return original if not found
+        field_name = UserForm_NAME_MAPPING.get(field_name, field_name)
+        return super(LoginForm, self).add_prefix(field_name)

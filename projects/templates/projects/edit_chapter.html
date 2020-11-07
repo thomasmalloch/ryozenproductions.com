@@ -1,0 +1,49 @@
+{% extends "common/base.html" %}
+
+{% block content %}
+
+<div class="bg-light text-center p-3">
+    <div class="container">
+        <h1 class="display-4">Edit Chapter #{{ chapter.sort }}: {{ chapter.title }} ({{ project.title }})</h1>
+    </div>
+</div>
+<div class="container pt-3">
+
+    <div class="row">
+        <div class="col-md-8 col-lg-9">
+            <!-- Post -->
+            <div class="row justify-content-md-center">
+                <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 border">
+                    <form class="p-3" method="post">
+                        {% load crispy_forms_tags %}
+                        {% csrf_token %}
+                        {{ chapter_form|crispy }}
+                        <button type="submit" class="save btn btn-default">Save</button>
+                    </form>
+                    <script>
+                      $('#id_body').summernote({
+                        placeholder: 'Edit Chapter',
+                        tabsize: 4,
+                        height: 200
+                      });
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-3 bg-light">
+
+            {% for chapter in chapters %}
+
+                {% if chapter.is_public or user.is_superuser %}
+                    <a href="{% url 'chapter' project_slug=project.slug chapter_sort=chapter.sort %}">{{ chapter.title }}</a>
+                {% endif %}
+                {% if project.user == user %}
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

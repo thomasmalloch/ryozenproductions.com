@@ -4,11 +4,14 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
 
-    path('project/<int:pk>/', views.project, name='project'),
-    #path('project/edit/<int:pk>/', views.edit_project, name='edit_project'),
-    #path('project/create/', views.create_project, name='create_project'),
+    path('project/<slug:slug>/', views.project_view, name='project'),
+    path('project/<slug:project_slug>/<int:chapter_sort>', views.chapter_view, name='chapter'),
 
-    path('project/<int:project_pk>/<int:chapter_sort>', views.chapter, name='chapter'),
-    #path('project/edit/<int:project_pk>/<int:chapter_pk>', views.edit_chapter, name='edit_chapter'),
-    #path('project/create/<int:project_pk>/', views.create_chapter, name='create_chapter'),
+    path('project/make', views.edit_project, name='make_project'),
+    path('project/<slug:project_slug>/edit', views.edit_project, name='edit_project'),
+    path('project/<slug:project_slug>/<str:action>', views.project_action, name='project_action'),
+
+    path('project/<slug:project_slug>/make', views.edit_chapter, name='make_chapter'),
+    path('project/<slug:project_slug>/<int:chapter_sort>/edit', views.edit_chapter, name='edit_chapter'),
+    path('project/<slug:project_slug>/<int:chapter_sort>/<str:action>', views.chapter_action, name='chapter_action'),
 ]

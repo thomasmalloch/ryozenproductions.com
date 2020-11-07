@@ -37,11 +37,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item {% if 'news' == page %}active{% endif %}">
+                    <li class="nav-item {% if 'projects' == page %}active{% endif %}">
                         <a class="nav-link" href="{% url 'index' %}">Recent</a>
                     </li>
-                    <li class="nav-item {% if 'contact' == page %}active{% endif %}">
-                        <!--<a class="nav-link" href="#">Contact</a>-->
+                    <li class="nav-item {% if 'about' == page %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'about' %}">About</a>
                     </li>
                 </ul>
                 {% if authenticated %}
@@ -59,6 +59,7 @@
                                 {% if user.is_superuser %}
                                     <div class="dropdown-divider"></div>
                                     <h6 class="dropdown-header">Admin</h6>
+                                    <a class="dropdown-item" href="{% url 'make_project' %}">Create Project</a>
                                     <a class="dropdown-item" href="/admin">Admin Page</a>
                                 {% endif %}
                                 <div class="dropdown-divider"></div>
@@ -70,7 +71,7 @@
                     <a class="btn border btn-light"href="{% url 'login' %}">Login</a>
                 {% endif %}
 
-                <div class="dropdown theme-button">
+                <!--<div class="dropdown theme-button">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Themes
                     </button>
@@ -79,7 +80,7 @@
                             <a class="dropdown-item" href="#">{{ t }}</a>
                         {% endfor %}
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </nav>

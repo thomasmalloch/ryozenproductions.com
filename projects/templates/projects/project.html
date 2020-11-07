@@ -7,21 +7,15 @@
 
         <article class="mb-3 pb-3 border-bottom">
                 <header class="mb-3" >
-                    <a class="" href="{% url 'project' pk=project.pk %}">
+                    <a class="" href="{% url 'project' slug=project.slug %}">
                         <h3 class="py-0 my-0">{{ project.title }}</h3>
                     </a>
                     <small class="text-muted">{{ project.description }}</small>
                     <div>
                         <span class="mr-1">
-                            <a href="#">
-                                <img class="img" height="12em" src="{% static 'news/icons/glyphicons-4-user.png' %}"/>
-                                {{ project.author.first_name }} {{ project.author.last_name }}
-                            </a>
-                        </span>
-                        <span class="mr-1">
-                            <a href="#">
-                                <img class="img" height="12em" src="{% static 'news/icons/glyphicons-46-calendar.png' %}"/>
-                                {{ project.created|date:"M j, Y" }}
+                            <a href="{% url 'about' %}">
+                                <img class="img" height="12em" src="{% static 'common/icons/glyphicons-4-user.png' %}"/>
+                                {{ project.user.first_name }} {{ project.user.last_name }}
                             </a>
                         </span>
                     </div>
@@ -29,25 +23,18 @@
                 <div>
                     <p> {{ project.description|striptags|default:"empty"|truncatewords:25 }} <a href="#">Read more [...]</a> </p>
                 </div>
-                <footer class="mt-2">
-                    <span class="text-muted">
-                        <a href="#">
-                            <img class="img" height="12em" src="{% static 'news/icons/glyphicons-145-folder-open.png' %}"/>
-                            {{ project.category }}
-                        </a>
-                    </span>
-                    {% if user.is_superuser %}
-                        <span class="text-muted mx-1">Admin:</span>
-                        <a href="#">Edit</a>
+                {% if user.is_superuser %}
+                    <footer class="mt-2">
+                        <span class="text-muted">Admin:</span>
+                        <a href="{% url 'edit_project' project_slug=project.slug %}">Edit</a>
                         |
-                        <a href="#">Delete</a>
+                        <a href="{% url 'project_action' project_slug=project.slug action='delete' %}">Delete</a>
                         |
-                        <a href="#">{% if post.is_public %}Make Private{% else %}Make Public{% endif %}</a>
-                    {% endif %}
-                </footer>
+                        <a href="{% url 'project_action' project_slug=project.slug action='toggle-public' %}">{% if project.is_public %}Make Private{% else %}Make Public{% endif %}</a>
+                    </footer>
+                {% endif %}
         </article>
 
         {% endif %}
     {% endfor %}
-
 {% endblock %}

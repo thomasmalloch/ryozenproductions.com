@@ -25,8 +25,9 @@ SECRET_KEY = '35!fl%&evy6ru9!1ks0^c@vdle-w%51u*pdpmoew0qyk^3tr1&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.novagetan.com', 'novagetan.com']
+ALLOWED_HOSTS = ['*']
 
+LOGIN_URL = "/account/login"
 
 # Application definition
 
