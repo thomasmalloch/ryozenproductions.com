@@ -7,7 +7,7 @@ urlpatterns = [
     path('project/<slug:slug>/', views.project_view, name='project'),
     path('project/<slug:project_slug>/<int:chapter_sort>/', views.chapter_view, name='chapter'),
 
-    path('project/make-project/', views.edit_project, name='make_project'),
+    path('make-project/', views.edit_project, name='make_project'),
     path('project/<slug:project_slug>/edit/', views.edit_project, name='edit_project'),
     path('project/<slug:project_slug>/action/<str:action>/', views.project_action, name='project_action'),
 
