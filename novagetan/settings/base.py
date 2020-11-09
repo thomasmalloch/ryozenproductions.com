@@ -11,19 +11,19 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env(
+    DEBUG=(bool, False)
+)
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '35!fl%&evy6ru9!1ks0^c@vdle-w%51u*pdpmoew0qyk^3tr1&'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# reading .env file
+environ.Env.read_env()
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
@@ -81,20 +81,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'novagetan.wsgi.application'
-
+ASGI_APPLICATION = 'novagetan.asgi.application'
 
 # Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'novagetan',
-        'USER': 'novagetan.com',
-        'PASSWORD': 'Hyi56C6&%v72A!b#',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
+    'default': env.db()
 }
 
 
