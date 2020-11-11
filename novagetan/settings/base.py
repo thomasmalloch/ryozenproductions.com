@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
     # installed apps
     'crispy_forms',
+    'compressor',
 ]
 
 MIDDLEWARE = [
@@ -79,6 +80,10 @@ TEMPLATES = [
         },
     },
 ]
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
 
 WSGI_APPLICATION = 'novagetan.wsgi.application'
 ASGI_APPLICATION = 'novagetan.asgi.application'
@@ -130,6 +135,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+]
 
 # Session
 SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
@@ -144,3 +155,6 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
 ]
+
+COMPRESS_OFFLINE = True
+LIBSASS_OUTPUT_STYLE = 'compressed'

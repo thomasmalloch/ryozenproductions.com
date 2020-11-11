@@ -7,10 +7,17 @@ from .forms import ProjectForm, ChapterForm
 
 
 def index(request):
+    context = Functions.build_page_context("index", request)
+    projects = Project.objects.all()[:25]
+    context["projects"] = projects
+    return render(request, 'projects/landing.html', context=context)
+
+
+def project_select(request):
     context = Functions.build_page_context("projects", request)
     projects = Project.objects.all()[:25]
     context["projects"] = projects
-    return render(request, 'projects/project.html', context=context)
+    return render(request, 'projects/projects.html', context=context)
 
 
 def project_view(request, slug):
