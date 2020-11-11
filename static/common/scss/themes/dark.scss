@@ -1,0 +1,23 @@
+@import "../bootstrap/bootstrap";
+
+//F0EFEF 838489 716D76 74727C 1E1A1E
+
+body {
+  background-color: #1E1A1E;
+  color: #F0EFEF;
+}
+
+
+//$gray-800:#1E1A1E;
+
+$theme-colors : (
+  "primary": #716d76,
+  "secondary": #838489,
+  "success": #579b5b,
+  "info": #211e23,
+  "warning": #d48b23,
+  "danger": #f44336,
+  "light": #F0EFEF,
+  "dark": #1E1A1E,
+  "gray-dark":#1E1A1E,
+);

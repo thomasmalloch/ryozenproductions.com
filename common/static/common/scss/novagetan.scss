@@ -1,0 +1,115 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Open Sans' sans-serif;
+    overflow-x: hidden;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+.offset::before {
+    height: 3.5rem;
+    margin-top: 3.5rem;
+    content: '';
+    display: block;
+}
+
+.offset::after {
+    height: -7rem;
+    margin-bottom: -7rem;
+    content: '';
+    display: block;
+}
+
+.parallax {
+    background-size: cover;
+    background-attachment: scroll;
+    background-position: top center!important;
+    background-repeat: repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 100%;
+    filter: grayscale(50%);
+}
+
+.parallax-fade-top {
+}
+
+.overlay {
+    z-index: 300;
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-color: #212529;
+    //opacity: .65;
+    //transition: transform 2s ease-in-out;
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.5) 0,
+        rgba(0, 0, 0, 0.3) 50%,
+        rgba(0, 0, 0, 0.1) 100%
+  );
+}
+
+.hero-bottom-wrap {
+    position: absolute;
+    width: 200%;
+    left: -50%;
+    bottom: 50px;
+}
+
+.section {
+    position: relative;
+    width: 100%;
+}
+
+.over-hide {
+    overflow: hidden;
+}
+
+.vh-75 {
+    height: 75vh;
+}
+
+.vh-25 {
+    height: 25vh;
+}
+
+/*.scroll .hero {
+  transform: scale(0.98);
+}*/
+
+.z-bigger {
+    z-index:1000;
+}
+
+z-bigger-2 {
+    z-index:1010;
+}
+
+.cover {
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container-fluid {
+  z-index: 10;
+}
+
+.hero-text {
+    //color: #e0;
+    font-weight:700;
+    font-size:5rem;
+    transform: scale(1, 2);
+    //text-shadow: 1px 1px 1px black;
+    filter: drop-shadow(1px 1px 2px black);
+}
