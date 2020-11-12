@@ -2,7 +2,7 @@
 <section class="d-flex position-relative vh-100">
     <div class="container-fluid container-fluid-max">
         <div class="row no-gutters h-100">
-            <div class="col-6 {% if forloop.counter0|divisibleby:'2' %}order-1{% else %}order-2{% endif %}">
+            <div class="order-xs-last order-sm-last order-md-last vh-md-50 col-md-12 vh-lg-100 col-lg-6 {% if forloop.counter0|divisibleby:'2' %} order-lg-first {% else %} order-lg-last {% endif %}">
                 <div class="row h-75">
                       <div class="p-5">
                           <h1>{{ project.title }}</h1>
@@ -16,8 +16,8 @@
                     </a>
                 </div>
             </div>
-            <div class="col-6 {% if forloop.counter0|divisibleby:'2' %}order-2{% else %}order-1{% endif %}">
-              <div class="vh-100 cover" style="background-image:url({% static 'common/images/pexels-pok-rie-1432669.jpg' %});"></div>
+            <div class="order-xs-first order-sm-first order-md-first vh-md-50 col-md-12 vh-lg-100 col-lg-6 {% if forloop.counter0|divisibleby:'2' %} order-lg-last {% else %} order-lg-first {% endif %}">
+                  <div class="vh-lg-100 vh-md-50 cover" style="background-image:url({% static 'common/images/pexels-pok-rie-1432669.jpg' %});"></div>
             </div>
         </div>
     </div>

@@ -15,3 +15,41 @@ body {
     background-color: #1E1A1E;
     color: #F0EFEF;
 }
+
+.container-fluid {
+    padding: 0;
+}
+
+.container-fluid-max {
+    padding: 0;
+}
+
+@include media-breakpoint-between(lg, xl) {
+    .vh-lg-100 {
+        height: 100vh;
+    }
+
+    .vh-lg-50 {
+        height: 50vh;
+    }
+}
+
+@include media-breakpoint-between(sm, md) {
+    .vh-md-100 {
+        height: 100vh;
+    }
+
+    .vh-md-50 {
+        height: 50vh;
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    .vh-sm-100 {
+        height: 100vh;
+    }
+
+    .vh-sm-50 {
+        height: 50vh;
+    }
+}
