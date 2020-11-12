@@ -25,8 +25,6 @@ environ.Env.read_env()
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['*']
-
 LOGIN_URL = "/account/login"
 
 # Application definition
@@ -135,7 +133,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -156,5 +153,11 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
 ]
 
+COMPRESS_ROOT = STATIC_ROOT
+
+COMPRESS_OFFLINE_CONTEXT = {'STATIC_URL': "/static/"}
 COMPRESS_OFFLINE = True
+COMPRESS_STORAGE = 'compressor.storage.CompressorFileStorage'
+COMPRESS_ENABLED = True
 LIBSASS_OUTPUT_STYLE = 'compressed'
+

@@ -4,9 +4,9 @@ register = template.Library()
 
 @register.filter
 def get_theme_path(theme):
-    return theme.path
+    pass#return theme
 
 
 @register.filter
 def get_theme_name(theme):
-    return theme.name
+    pass #return theme.name
