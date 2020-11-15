@@ -125,7 +125,7 @@ z-bigger-2 {
         margin-bottom:1rem;
     }
     .parallax {
-        background-size: 150%;
+        background-size: 270%;
     }
 }
 
@@ -133,10 +133,16 @@ z-bigger-2 {
     .hero-text {
         font-size:4rem;
     }
+    .parallax {
+        background-size: 330%;
+    }
 }
 
 @media only screen and (max-width: 375px) {
     .hero-text {
         font-size:3rem;
+    }
+    .parallax {
+        background-size: cover;
     }
 }
