@@ -22,8 +22,8 @@ env = environ.Env(
 
 # reading .env file
 environ.Env.read_env()
-SECRET_KEY = env('SECRET_KEY')
-DEBUG = env('DEBUG')
+SECRET_KEY = env.str('SECRET_KEY', '')
+DEBUG = env.bool('DEBUG', False)
 
 LOGIN_URL = "/account/login"
 
@@ -156,7 +156,7 @@ PASSWORD_HASHERS = [
 COMPRESS_ROOT = STATIC_ROOT
 
 COMPRESS_OFFLINE_CONTEXT = {'STATIC_URL': "/static/"}
-COMPRESS_OFFLINE = env('COMPRESS_OFFLINE')
+COMPRESS_OFFLINE = env.bool('COMPRESS_OFFLINE', False)
 COMPRESS_STORAGE = 'compressor.storage.CompressorFileStorage'
 COMPRESS_ENABLED = True
 LIBSASS_OUTPUT_STYLE = 'compressed'
