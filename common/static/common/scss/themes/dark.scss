@@ -24,6 +24,15 @@ body {
     padding: 0;
 }
 
+.row {
+    margin: 0;
+}
+
+.note-editable {
+    background-color: #2B2B2B;
+    color: #A7B6C5;
+}
+
 @include media-breakpoint-between(lg, xl) {
     .vh-lg-100 {
         height: 100vh;
@@ -45,6 +54,10 @@ body {
 }
 
 @include media-breakpoint-down(sm) {
+    .order-sm-first{
+        order: -1;
+    }
+
     .vh-sm-100 {
         height: 100vh;
     }

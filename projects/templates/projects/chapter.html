@@ -2,36 +2,35 @@
 
 {% block content %}
 
-<nav>
+<div class="offset">
+    <div class="container mt-3">
 
-</nav>
-<div class="container mt-3">
+        <div class="row">
+            <div class="col-md-8 col-lg-9">
 
-    <div class="row">
-        <div class="col-md-8 col-lg-9">
+                {{ selected.body|safe }}
 
-            {{ selected.body|safe }}
+            </div>
+            <div class="col-md-4 col-lg-3 bg-light">
 
-        </div>
-        <div class="col-md-4 col-lg-3 bg-light">
+                {% for chapter in chapters %}
+                    {% if chapter.is_public or user.is_superuser %}
+                        <div>
+                            <a href="{% url 'chapter' project_slug=project.slug chapter_sort=chapter.sort %}">{{ chapter.title }}</a>
+                            {% if user.is_superuser %}
+                            |<a href="{% url 'edit_chapter' project_slug=project.slug chapter_sort=chapter.sort %}">Edit</a>
+                            <!--|<a href="{% url 'chapter_action' project_slug=project.slug chapter_sort=chapter.sort action='delete' %}">Delete</a>-->
+                            |<a href="{% url 'chapter_action' project_slug=project.slug chapter_sort=chapter.sort action='toggle_public' %}">{% if project.is_public %}Make Private{% else %}Make Public{% endif %}</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
 
-            {% for chapter in chapters %}
-                {% if chapter.is_public or user.is_superuser %}
-                    <div>
-                        <a href="{% url 'chapter' project_slug=project.slug chapter_sort=chapter.sort %}">{{ chapter.title }}</a>
-                        {% if user.is_superuser %}
-                        |<a href="{% url 'edit_chapter' project_slug=project.slug chapter_sort=chapter.sort %}">Edit</a>
-                        <!--|<a href="{% url 'chapter_action' project_slug=project.slug chapter_sort=chapter.sort action='delete' %}">Delete</a>-->
-                        |<a href="{% url 'chapter_action' project_slug=project.slug chapter_sort=chapter.sort action='toggle_public' %}">{% if project.is_public %}Make Private{% else %}Make Public{% endif %}</a>
-                        {% endif %}
-                    </div>
+                {% endfor %}
+                {% if user.is_superuser %}
+                    <div class="dropdown-divider"></div>
+                    <a href="{% url 'make_chapter' project_slug=project.slug %}">Add New Chapter</a>
                 {% endif %}
-
-            {% endfor %}
-            {% if user.is_superuser %}
-                <div class="dropdown-divider"></div>
-                <a href="{% url 'make_chapter' project_slug=project.slug %}">Add New Chapter</a>
-            {% endif %}
+            </div>
         </div>
     </div>
 </div>

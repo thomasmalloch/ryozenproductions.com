@@ -2,50 +2,53 @@
 
 {% block content %}
 
-<div class="bg-light text-center p-3">
-    <div class="container">
-        <h1 class="display-4">Edit Chapter #{{ chapter.sort }}: {{ chapter.title }} ({{ project.title }})</h1>
+<div class="offset">
+    <div class="text-center p-3">
+        <div class="container">
+            <h1 class="display-4">Edit Chapter #{{ chapter.sort }}: {{ chapter.title }} ({{ project.title }})</h1>
+        </div>
     </div>
-</div>
-<div class="container pt-3">
 
-    <div class="row">
-        <div class="col-md-8 col-lg-9">
-            <!-- Post -->
-            <div class="row justify-content-md-center">
-                <div class="border">
-                    <form class="p-3" method="post">
-                        {% load crispy_forms_tags %}
-                        {% csrf_token %}
-                        {{ chapter_form|crispy }}
-                        <button type="submit" class="save btn btn-default">Save</button>
-                    </form>
-                    <script>
-                      $('#id_body').summernote({
-                        placeholder: 'Edit Chapter',
-                        tabsize: 4,
-                        height: 200
-                      });
-                    </script>
+    <div class="container pt-3">
+
+        <div class="row">
+            <div class="col-md-8 col-lg-9">
+                <!-- Post -->
+                <div class="row justify-content-md-center">
+                    <div class="border">
+                        <form class="p-3" method="post">
+                            {% load crispy_forms_tags %}
+                            {% csrf_token %}
+                            {{ chapter_form|crispy }}
+                            <button class="btn btn-primary" type="submit" class="save btn btn-default">Save</button>
+                        </form>
+                        <script>
+                          $('#id_body').summernote({
+                            placeholder: 'Edit Chapter',
+                            tabsize: 4,
+                            height: 200
+                          });
+                        </script>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4 col-lg-3 bg-light">
+            <div class="col-md-4 col-lg-3 bg-secondary">
 
-            {% for c in chapters %}
-                <div>
-                    <a href="{% url 'chapter' project_slug=project.slug chapter_sort=chapter.sort %}">{{ c.title }}</a>
-                    {% if user.is_superuser and chapter != c %}
-                    | <a href="{% url 'edit_chapter' project_slug=project.slug chapter_sort=c.sort %}">Edit</a>
-                    {% endif %}
-                </div>
-            {% endfor %}
+                {% for c in chapters %}
+                    <div>
+                        <a href="{% url 'chapter' project_slug=project.slug chapter_sort=chapter.sort %}">{{ c.title }}</a>
+                        {% if user.is_superuser and chapter != c %}
+                        | <a href="{% url 'edit_chapter' project_slug=project.slug chapter_sort=c.sort %}">Edit</a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
 
-            {% if user.is_superuser %}
-                <div class="dropdown-divider"></div>
-                <a href="{% url 'chapter_action' project_slug=project.slug chapter_sort=chapter.sort action='delete' %}">Delete Chapter</a>
-            {% endif %}
+                {% if user.is_superuser %}
+                    <div class="dropdown-divider"></div>
+                    <a class="btn-sm bg-warning" href="{% url 'chapter_action' project_slug=project.slug chapter_sort=chapter.sort action='delete' %}">Delete Chapter</a>
+                {% endif %}
 
+            </div>
         </div>
     </div>
 </div>

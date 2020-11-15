@@ -2,22 +2,22 @@
 <section class="d-flex position-relative vh-100">
     <div class="container-fluid container-fluid-max">
         <div class="row no-gutters h-100">
-            <div class="order-xs-last order-sm-last order-md-last vh-md-50 col-md-12 vh-lg-100 col-lg-6 {% if forloop.counter0|divisibleby:'2' %} order-lg-first {% else %} order-lg-last {% endif %}">
+            <div class="order-sm-last order-md-last vh-md-50 col-md-12 vh-lg-100 col-lg-6 {% if forloop.counter0|divisibleby:'2' %} order-lg-first {% else %} order-lg-last {% endif %}">
                 <div class="row h-75">
                       <div class="p-5">
                           <h1>{{ project.title }}</h1>
                           {{ project.description|safe }}
-                          <a class="btn btn-primary" href="#home">Read More</a>
+                          <a class="btn-sm btn-primary" href="#home">Read More</a>
                       </div>
                 </div>
                 <div class="row h-25 align-items-center">
-                    <a class="btn mx-auto" href="{% if forloop.last %}#about{% else %}#fullscreen-card-{{ forloop.counter }}{% endif %}" role="button">
+                    <a class="btn-sm btn-primary mx-auto mb-5" href="{% if forloop.last %}#about{% else %}#fullscreen-card-{{ forloop.counter }}{% endif %}" role="button">
                         <img src="{% static 'common/icons/bootstrap/arrow-down.svg' %}" class="img-fluid">
                     </a>
                 </div>
             </div>
-            <div class="order-xs-first order-sm-first order-md-first vh-md-50 col-md-12 vh-lg-100 col-lg-6 {% if forloop.counter0|divisibleby:'2' %} order-lg-last {% else %} order-lg-first {% endif %}">
-                  <div class="vh-lg-100 vh-md-50 cover" style="background-image:url({% static 'common/images/pexels-pok-rie-1432669.jpg' %});"></div>
+            <div class="order-sm-first order-md-first col-md-12 vh-sm-50 vh-md-50 vh-lg-100 col-lg-6 {% if forloop.counter0|divisibleby:'2' %} order-lg-last {% else %} order-lg-first {% endif %}">
+                  <div class="vh-lg-100 vh-sm-50 vh-md-50 cover" style="background-image:url({% static 'common/images/pexels-pok-rie-1432669.jpg' %});"></div>
             </div>
         </div>
     </div>

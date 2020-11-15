@@ -10,7 +10,7 @@ class Tag(models.Model):
 
 class Project(models.Model):
     title = models.CharField(max_length=100, default="New Project", verbose_name="Title:")
-    description = models.CharField(max_length=100, default="Project Description", verbose_name="Description:")
+    description = models.TextField(blank=True, default="Project Description", verbose_name="Description:")
     is_public = models.BooleanField(default=False, verbose_name="Is Public:")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=100, default=slugify(uuid.uuid4()))

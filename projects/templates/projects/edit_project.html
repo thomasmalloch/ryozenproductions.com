@@ -2,32 +2,33 @@
 
 {% block content %}
 
-<div class="bg-light text-center p-3">
-    <div class="container">
-        <h1 class="display-4">Edit Project: {{ project.title }}</h1>
+<div class="offset">
+    <div class="bg-dark text-center p-3">
+        <div class="container">
+            <h1 class="display-4">Edit Project: {{ project.title }}</h1>
+        </div>
     </div>
-</div>
-<div class="container pt-3">
-    <!-- Project -->
-    <div class="row justify-content-md-center">
-        <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 border">
-            <form class="p-3" method="post">
-                {% load crispy_forms_tags %}
-                {% csrf_token %}
-                {{ project_form|crispy }}
-                <button type="submit" class="save btn btn-default">Save</button>
-            </form>
-            <script>
-              $('#id_body').summernote({
-                placeholder: 'Edit Project',
-                tabsize: 4,
-                height: 200
-              });
-            </script>
-            <div class="dropdown-divider"></div>
-            <a href="{% url 'project_action' project_slug=project.slug action='delete' %}">Delete Project</a>
+    <div class="container pt-3">
+        <!-- Project -->
+        <div class="row justify-content-md-center">
+            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 border pb-2">
+                <form class="p-3" method="post">
+                    {% load crispy_forms_tags %}
+                    {% csrf_token %}
+                    {{ project_form|crispy }}
+                    <button type="submit" class="save btn btn-primary">Save</button>
+                </form>
+                <script>
+                  $('#id_description').summernote({
+                    placeholder: 'Edit Project',
+                    tabsize: 4,
+                    height: 200
+                  });
+                </script>
+                <div class="dropdown-divider"></div>
+                <a class="btn-sm btn-warning" href="{% url 'project_action' project_slug=project.slug action='delete' %}">Delete Project</a>
+            </div>
         </div>
     </div>
 </div>
-
 {% endblock %}
